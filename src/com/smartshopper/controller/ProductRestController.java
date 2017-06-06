@@ -1,51 +1,43 @@
 package com.smartshopper.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.smartshopper.exceptions.UserNotFoundException;
-import com.smartshopper.models.Product;
-import com.smartshopper.repository.ProductMongoRepository;
+import com.smartshopper.models.io.Product;
+import com.smartshopper.service.ProductService;
 
 @RestController
 public class ProductRestController {
 
 	@Autowired
-	private ProductMongoRepository productRepo; 
-	@RequestMapping(path="products")
-	public List<Product> getAllProducts(){
-		return	productRepo.findAll();
-	}
+	private ProductService productService;
 	
-	@RequestMapping(path="products/{id}")
-	public Product getByProductId(@PathVariable(name="id") String productId)throws UserNotFoundException{
-		if(productId.equalsIgnoreCase("error")){
-			throw new UserNotFoundException();
+	@RequestMapping(method=RequestMethod.GET,path="/product")
+	public Product getProductDetails(@RequestParam(value="id",required=false) String productId,
+										@RequestParam(value="sku",required=false) String sku){
+		Product result = null;
+		if(productId!=null){
+			//validate if product id is empty
+			if(!productId.trim().isEmpty()){
+				result = productService.getProductDetailsById(productId);
+			}else{
+				//Valdation Error response
+			}
+		}else if(sku!=null){
+			if(!sku.trim().isEmpty()){
+				result = productService.getProductDetailsBySKU(sku);
+			}else{
+				//Validation Error Response
+			}
 		}
-		return productRepo.findOne(productId);
+		return result;
 	}
 	
-	@RequestMapping(path="products/add", method = RequestMethod.POST)
-	public String addProduct(@RequestBody Product productInfo){
-		productRepo.insert(productInfo);
-		return "Completed";
+	@RequestMapping(path="/product/add", method = RequestMethod.POST)
+	public String addProduct(Product product){
+		return productService.addProduct(product);
 	}
-	
-
-	@RequestMapping(path="products/sku/{sku}")
-	public Product addProduct(@PathVariable String sku){
-		return productRepo.findBysku(sku);
-	}
-	
-	@RequestMapping(path="products/category/{category}")
-	public List<Product> getByProductCategory(@PathVariable  String category){
-		return productRepo.findByCategory(category);
-	}
-	
 }
