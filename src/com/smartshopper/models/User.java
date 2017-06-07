@@ -1,5 +1,5 @@
 package com.smartshopper.models;
 
-public class Store {
+public class User {
 
 }

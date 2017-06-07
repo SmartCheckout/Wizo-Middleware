@@ -1,12 +1,14 @@
 package com.smartshopper.repository;
 
+import java.util.List;
+
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import com.smartshopper.models.dbo.ProductDBO;
+import com.smartshopper.models.Product;
 
-public interface ProductMongoRepository extends MongoRepository<ProductDBO, String> {
-	public ProductDBO findOneByuniqueId(String id);
-	public ProductDBO findOneBysku(String sku);
-	public ProductDBO insert(ProductDBO product);
+public interface ProductMongoRepository extends MongoRepository<Product, String>{
+	
+	public Product findBysku(String sku);
+	public List<Product> findByCategory(String category);
 
 }
