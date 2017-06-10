@@ -22,18 +22,6 @@ public class ProductDBO{
 		super();
 	}
 	
-	
-	public ProductDBO(Product product){
-		if(product!=null){
-			this.uniqueId = product.getUniqueId();
-			this.barcode = product.getBarcode();
-			this.title = product.getTitle();
-			this.description = product.getDescription();
-			this.category = product.getCategory();
-			this.retailPrice = product.getRetailPrice();
-			this.discount = product.getDiscount();
-		}
-	}
 	public ProductDBO(String uniqueId, String barcode, String title,
 			String description, String category, Double retailPrice,Float discount) {
 		super();
@@ -47,6 +35,9 @@ public class ProductDBO{
 	}
 
 
+	public Product toIO(){
+		return new Product(uniqueId, barcode, title, description, category, retailPrice, discount);
+	}
 
 	public String getUniqueId() {
 		return uniqueId;

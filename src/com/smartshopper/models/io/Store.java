@@ -1,5 +1,7 @@
-package com.smartshopper.models;
+package com.smartshopper.models.io;
 
+import com.smartshopper.models.Address;
+import com.smartshopper.models.Location;
 import com.smartshopper.models.dbo.StoreDBO;
 
 public class Store {
@@ -7,8 +9,6 @@ public class Store {
 	private String id;
 	private String title;
 	private String barcode;
-	
-
 	private Address address;
 	private String displayAddress;
 	private String phone;
@@ -18,18 +18,23 @@ public class Store {
 	public Store() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	public Store(StoreDBO storeDBO){
-		this.id = storeDBO.getId();
-		this.title = storeDBO.getTitle();
-		this.barcode = storeDBO.getBarcode();
-		this.address = storeDBO.getAddress();
-		this.displayAddress = generateDisplayAddress(storeDBO.getAddress(), storeDBO.getTitle());
-		this.phone = storeDBO.getPhone();
-		this.email = storeDBO.getEmail();
-		this.location = storeDBO.getlocation();
-	}
 
+	public Store(String id, String barcode, String title, Address address, String phone,
+			String email, Location location) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.barcode = barcode;
+		this.address = address;
+		this.phone = phone;
+		this.email = email;
+		this.location = location;
+	}
+	
+	public StoreDBO toDBO(){
+		return new StoreDBO(id, barcode, title, address, phone, email, location);
+	}
+	
 	public String getId() {
 		return id;
 	}

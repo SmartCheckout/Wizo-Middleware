@@ -5,6 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.smartshopper.models.Address;
 import com.smartshopper.models.Location;
+import com.smartshopper.models.io.Store;
 
 @Document(collection="smartshopper.store")
 public class StoreDBO {
@@ -32,6 +33,11 @@ public class StoreDBO {
 		this.email = email;
 		this.location = location;
 	}
+	
+	public Store toIO(){
+		return new Store(id, barcode, title, address, phone, email, location);
+	}
+	
 	public String getId() {
 		return id;
 	}

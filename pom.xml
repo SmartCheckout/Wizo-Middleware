@@ -38,10 +38,10 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
-				<!-->version>3.1</version-->
+				<version>3.0.0</version>
 				<configuration>
 					<descriptorRefs>
-						<descriptorRef>with-dependencies</descriptorRef>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
 					</descriptorRefs>
 					<archive>
 						<manifest>
@@ -52,7 +52,7 @@
 				<executions>
 					<execution>
 						<id>make-assembly</id>
-						<phase>package</phase>
+						<phase>package	</phase>
 						<goals>
 							<goal>single</goal>
 						</goals>

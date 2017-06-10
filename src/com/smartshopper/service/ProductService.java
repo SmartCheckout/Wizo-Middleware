@@ -14,20 +14,24 @@ public class ProductService {
 	private ProductMongoRepository productRepo;
 
 	public Product getProductDetailsBySKU(String sku){
-		ProductDBO productDBO =  productRepo.findOneBysku(sku); 
-		return new Product(productDBO);
+		ProductDBO productDBO =  productRepo.findOneBybarcode(sku); 
+		return productDBO.toIO();
 	}
 	
 	public Product getProductDetailsById(String id){
 		ProductDBO productDBO =  productRepo.findOneByuniqueId(id); 
-		return new Product(productDBO);
+		return productDBO.toIO();
 		
 	}
 	
 	public String addProduct(Product product){
-		ProductDBO productDBO = new ProductDBO(product);
-		productRepo.insert(productDBO);
+		ProductDBO productDBO = new ProductDBO();
+		if(product!=null){
+			productDBO = product.toDBO();
+			productRepo.insert(productDBO);
+		}
 		return productDBO.getUniqueId();
+		
 	}
 
 }

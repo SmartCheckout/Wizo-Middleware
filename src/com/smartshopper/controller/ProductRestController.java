@@ -1,6 +1,7 @@
 package com.smartshopper.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,7 +38,7 @@ public class ProductRestController {
 	}
 	
 	@RequestMapping(path="/product/add", method = RequestMethod.POST)
-	public String addProduct(Product product){
+	public String addProduct(@RequestBody Product product){
 		return productService.addProduct(product);
 	}
 }

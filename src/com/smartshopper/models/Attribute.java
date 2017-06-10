@@ -1,4 +1,4 @@
-package com.smartshopper.models.dbo;
+package com.smartshopper.models;
 
 public class Attribute {
 

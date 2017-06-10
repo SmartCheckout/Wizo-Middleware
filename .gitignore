@@ -17,8 +17,10 @@ buildSrc/build
 /spring-*/build
 /src/asciidoc/build
 target/
+.metadata/
 
 # Eclipse artifacts, including WTP generated manifests
 .classpath
 .project
 spring-*/src/main/java/META-INF/MANIFEST.MF
+.class
