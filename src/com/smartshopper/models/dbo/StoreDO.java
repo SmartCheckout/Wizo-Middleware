@@ -8,7 +8,7 @@ import com.smartshopper.models.Location;
 import com.smartshopper.models.io.Store;
 
 @Document(collection="smartshopper.store")
-public class StoreDBO {
+public class StoreDO {
 
 	@Id
 	private String id;
@@ -19,10 +19,10 @@ public class StoreDBO {
 	private String email;
 	private Location location;
 	
-	public StoreDBO(){
+	public StoreDO(){
 		super();
 	}
-	public StoreDBO(String id, String barcode, String title, Address address, String phone,
+	public StoreDO(String id, String barcode, String title, Address address, String phone,
 			String email, Location location) {
 		super();
 		this.id = id;

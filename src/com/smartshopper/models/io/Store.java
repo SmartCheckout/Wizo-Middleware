@@ -2,7 +2,7 @@ package com.smartshopper.models.io;
 
 import com.smartshopper.models.Address;
 import com.smartshopper.models.Location;
-import com.smartshopper.models.dbo.StoreDBO;
+import com.smartshopper.models.dbo.StoreDO;
 
 public class Store {
 
@@ -29,10 +29,11 @@ public class Store {
 		this.phone = phone;
 		this.email = email;
 		this.location = location;
+		this.displayAddress = this.generateDisplayAddress(address, title);
 	}
 	
-	public StoreDBO toDBO(){
-		return new StoreDBO(id, barcode, title, address, phone, email, location);
+	public StoreDO toDBO(){
+		return new StoreDO(id, barcode, title, address, phone, email, location);
 	}
 	
 	public String getId() {

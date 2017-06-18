@@ -7,49 +7,51 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection="smartshopper.order")
-public class Order {
+import com.smartshopper.models.User;
+
+@Document(collection="smartshopper.transaction")
+public class TransactionDO {
 	@Id
-	private String orderId;
-	private Date orderDate;
+	private String trnsId;
+	private Date trnsDate;
 	@DBRef
-	private StoreDBO store;
+	private StoreDO store;
 	@DBRef
 	private User customer;
-	List<CartItem> cart;
+	List<CartItemDO> cart;
 	private Double grandTotal;
 	
-	public Order() {
+	public TransactionDO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Order(String orderId, Date orderDate, StoreDBO store, User customer,
-			List<CartItem> cart, Double grandTotal) {
+	public TransactionDO(String trnsId, Date trnsDate, StoreDO store, User customer,
+			List<CartItemDO> cart, Double grandTotal) {
 		super();
-		this.orderId = orderId;
-		this.orderDate = orderDate;
+		this.trnsId = trnsId;
+		this.trnsDate = trnsDate;
 		this.store = store;
 		this.customer = customer;
 		this.cart = cart;
 		this.grandTotal = grandTotal;
 	}
-	public String getOrderId() {
-		return orderId;
+	public String getTrnsId(){
+		return this.trnsId;
 	}
-	public void setOrderId(String orderId) {
-		this.orderId = orderId;
+	public void setTrnsId(String trnsId) {
+		this.trnsId = trnsId;
 	}
-	public Date getOrderDate() {
-		return orderDate;
+	public Date getTrnsDate() {
+		return trnsDate;
 	}
-	public void setOrderDate(Date orderDate) {
-		this.orderDate = orderDate;
+	public void setTrnsDate(Date trnsDate) {
+		this.trnsDate = trnsDate;
 	}
-	public StoreDBO getStore() {
+	public StoreDO getStore() {
 		return store;
 	}
-	public void setStore(StoreDBO store) {
+	public void setStore(StoreDO store) {
 		this.store = store;
 	}
 	public User getCustomer() {
@@ -58,10 +60,10 @@ public class Order {
 	public void setCustomer(User customer) {
 		this.customer = customer;
 	}
-	public List<CartItem> getCart() {
+	public List<CartItemDO> getCart() {
 		return cart;
 	}
-	public void setCart(List<CartItem> cart) {
+	public void setCart(List<CartItemDO> cart) {
 		this.cart = cart;
 	}
 	public Double getGrandTotal() {

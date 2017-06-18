@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.smartshopper.exceptions.Exceptions.MoreStoresFoundException;
+import com.smartshopper.exceptions.Exceptions.NoStoreFoundException;
 import com.smartshopper.models.Location;
-import com.smartshopper.models.io.Product;
 import com.smartshopper.models.io.Store;
 import com.smartshopper.service.StoreService;
 
@@ -39,12 +40,22 @@ public class StoreRestController {
 	 * @return: List<Store>
 	 * */
 	@RequestMapping(method=RequestMethod.GET,path="/store/locationsearch")
-	public List<Store> getNearbyStores(@RequestParam(value="radius", required=false) Float radius,
-										@RequestParam(value="context", required=false) String context,
-										 @RequestParam(value="longitude", required=true) Double longitude,
-										  @RequestParam(value="lattitude", required=true) Double lattitude){
-	
-		return storeService.findNearByStores(new Location("Point" ,new Double[] {longitude,lattitude}),radius, context);
+	public List<Store> getStoreByLocation(@RequestParam(value="radius", required=false) Float radius,
+											@RequestParam(value="context", required=false) String context,
+											@RequestParam(value="longitude", required=true) Double longitude,
+											@RequestParam(value="lattitude", required=true) Double lattitude)
+											throws NoStoreFoundException,MoreStoresFoundException{
+		
+		
+		Location queryLoc = new Location("Point", new Double[] {longitude,lattitude});
+		List<Store> stores = storeService.findNearByStores(queryLoc, radius, context);
+		
+		if(stores == null || stores.size() ==0)
+			throw new NoStoreFoundException("Store not found for the input location");
+		if(stores.size() > 1)
+			throw new MoreStoresFoundException("More than one store matched for the input location");
+		
+		return stores;
 	}
 	
 	/**
@@ -53,8 +64,14 @@ public class StoreRestController {
 	 * @return: Store
 	 * */
 	@RequestMapping(method=RequestMethod.GET,path="/store/barcodesearch/{barcode}")
-	public Store findStoreByBarcode(@PathVariable("barcode") String barcode){
-		return storeService.findStoreByBarcode(barcode);
+	public Store findStoreByBarcode(@PathVariable("barcode") String barcode) throws NoStoreFoundException{
+		Store store = storeService.findStoreByBarcode(barcode);
+		
+		if(store == null){
+			throw new NoStoreFoundException("No store details matched for the input barcode");
+		}
+		
+		return store;
 	}
 	
 	@RequestMapping(path="/store/add", method = RequestMethod.POST)

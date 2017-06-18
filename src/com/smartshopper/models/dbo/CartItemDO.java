@@ -2,16 +2,16 @@ package com.smartshopper.models.dbo;
 
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
-public class CartItem {
+public class CartItemDO {
 
 	@DBRef
-	private ProductDBO product;
+	private ProductDO product;
 	private Integer quantity;
 	private Double costPrice;
 	private Float discount;
 	private Double sellingPrice;
 	
-	public CartItem(ProductDBO product, Integer quantity, Double costPrice,
+	public CartItemDO(ProductDO product, Integer quantity, Double costPrice,
 			Float discount, Double sellingPrice) {
 		super();
 		this.product = product;
@@ -20,14 +20,14 @@ public class CartItem {
 		this.discount = discount;
 		this.sellingPrice = sellingPrice;
 	}
-	public CartItem() {
+	public CartItemDO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public ProductDBO getProduct() {
+	public ProductDO getProduct() {
 		return product;
 	}
-	public void setProduct(ProductDBO product) {
+	public void setProduct(ProductDO product) {
 		this.product = product;
 	}
 	public Integer getQuantity() {

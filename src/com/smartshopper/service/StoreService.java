@@ -10,8 +10,7 @@ import org.springframework.data.geo.Point;
 import org.springframework.stereotype.Service;
 
 import com.smartshopper.models.Location;
-import com.smartshopper.models.dbo.ProductDBO;
-import com.smartshopper.models.dbo.StoreDBO;
+import com.smartshopper.models.dbo.StoreDO;
 import com.smartshopper.models.io.Store;
 import com.smartshopper.repository.StoreMongoRepository;
 
@@ -24,7 +23,7 @@ public class StoreService {
 	public List<Store> findAllStores(){
 		//Business Level Validations - TBD
 		List<Store> returnList = new ArrayList<Store>();
-		for(StoreDBO store : storeRepo.findAll()){
+		for(StoreDO store : storeRepo.findAll()){
 			returnList.add(store.toIO());
 		}
 		return returnList;
@@ -38,14 +37,15 @@ public class StoreService {
 		}
 		else{
 			//Default radius value
-			miles = (miles == null || miles == 0.0f)?2.0f:miles;
+			miles = (miles == null || miles == 0.0f)?1.0f:miles;
 		}
 		
 		Distance radius = new Distance(miles,Metrics.MILES);
+		Point point  = new Point(center.getCoordinates()[0], center.getCoordinates()[1]);
 		
-		List<StoreDBO> nearByStoresDBO = storeRepo.findByLocationNear(new Point(center.getCoordinates()[0], center.getCoordinates()[1]),radius);
+		List<StoreDO> nearByStoresDBO = storeRepo.findBylocationNear(point,radius);
 		List<Store> nearByStores = new ArrayList<Store>();
-		for(StoreDBO storeDBO : nearByStoresDBO){
+		for(StoreDO storeDBO : nearByStoresDBO){
 			nearByStores.add(storeDBO.toIO());
 		}
 		
@@ -53,17 +53,17 @@ public class StoreService {
 	}
 
 	public Store findStoreByBarcode(String barcode){
-		StoreDBO storeDBO = storeRepo.findOneBybarcode(barcode);
+		StoreDO storeDBO = storeRepo.findOneBybarcode(barcode);
 		return storeDBO!=null?storeDBO.toIO():null;
 	}
 	
 	public Store findStoreById(String storeId){
-		StoreDBO storeDBO = storeRepo.findOne(storeId);
+		StoreDO storeDBO = storeRepo.findOne(storeId);
 		return storeDBO!=null?storeDBO.toIO():null;
 	}
 	
 	public String addStoreDetails(Store storeDetails){
-		StoreDBO storeDBO = new StoreDBO();
+		StoreDO storeDBO = new StoreDO();
 		if(storeDetails!=null){
 			storeDBO = storeDetails.toDBO();
 			storeRepo.insert(storeDBO);

@@ -7,7 +7,7 @@ import com.smartshopper.models.io.Product;
 
 
 @Document(collection="smartshopper.product")
-public class ProductDBO{
+public class ProductDO{
 
 	@Id
 	private String uniqueId;
@@ -18,11 +18,11 @@ public class ProductDBO{
 	private Double retailPrice;
 	private Float discount;
 	
-	public ProductDBO(){
+	public ProductDO(){
 		super();
 	}
 	
-	public ProductDBO(String uniqueId, String barcode, String title,
+	public ProductDO(String uniqueId, String barcode, String title,
 			String description, String category, Double retailPrice,Float discount) {
 		super();
 		this.uniqueId = uniqueId;

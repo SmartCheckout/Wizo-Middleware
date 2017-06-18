@@ -1,6 +1,6 @@
 package com.smartshopper.models.io;
 
-import com.smartshopper.models.dbo.ProductDBO;
+import com.smartshopper.models.dbo.ProductDO;
 
 public class Product{
 
@@ -25,8 +25,8 @@ public class Product{
 		this.discount = discount;
 	}
 	
-	public ProductDBO toDBO(){
-		return new ProductDBO(uniqueId, barcode, title, description, category, retailPrice, discount);
+	public ProductDO toDBO(){
+		return new ProductDO(uniqueId, barcode, title, description, category, retailPrice, discount);
 	}
 	public String getUniqueId() {
 		return uniqueId;
