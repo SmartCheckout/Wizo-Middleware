@@ -39,7 +39,7 @@
 				<version>3.1</version>
 				<configuration>
 					<source>1.8</source>
-					<target>1.8</target>
+					<target>1.7</target>
 				</configuration>
 			</plugin>
 			
@@ -47,10 +47,11 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
+                	<executable>true</executable>
                     <fork>true</fork>
                     <mainClass>com.smartshopper.ShopperManager</mainClass>
                 </configuration>
-                  <executions>
+               	<executions>
                     <execution>
                       <goals>
                         <goal>repackage</goal>
