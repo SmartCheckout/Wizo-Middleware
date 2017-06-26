@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.smartshopper.models.User;
+import com.smartshopper.models.dbo.TransactionDO;
 
 public class Transaction {
 	
@@ -14,8 +15,6 @@ public class Transaction {
 	private User customer;
 	List<CartItem> cart;
 	private Double grandTotal;
-	
-	
 	
 	public Transaction(String trnsId, Date trnsDate, Store store, User customer, List<CartItem> cart,
 			Double grandTotal) {
