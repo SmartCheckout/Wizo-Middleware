@@ -2,23 +2,24 @@ package com.smartshopper.models.dbo;
 
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
+import com.smartshopper.models.io.CartItem;
+import com.smartshopper.models.io.Product;
+
 public class CartItemDO {
 
 	@DBRef
 	private ProductDO product;
 	private Integer quantity;
-	private Double costPrice;
-	private Float discount;
-	private Double sellingPrice;
 	
-	public CartItemDO(ProductDO product, Integer quantity, Double costPrice,
-			Float discount, Double sellingPrice) {
+	public CartItemDO(ProductDO product, Integer quantity) {
 		super();
 		this.product = product;
 		this.quantity = quantity;
-		this.costPrice = costPrice;
-		this.discount = discount;
-		this.sellingPrice = sellingPrice;
+	}
+	
+	public CartItem toIO(){
+		Product productIO = product == null ? null : product.toIO();
+		return new CartItem(productIO, quantity);
 	}
 	public CartItemDO() {
 		super();
@@ -36,26 +37,5 @@ public class CartItemDO {
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
-	public Double getCostPrice() {
-		return costPrice;
-	}
-	public void setCostPrice(Double costPrice) {
-		this.costPrice = costPrice;
-	}
-	public Float getDiscount() {
-		return discount;
-	}
-	public void setDiscount(Float discount) {
-		this.discount = discount;
-	}
-	public Double getSellingPrice() {
-		return sellingPrice;
-	}
-	public void setSellingPrice(Double sellingPrice) {
-		this.sellingPrice = sellingPrice;
-	}
-	
-	
-	
 	
 }

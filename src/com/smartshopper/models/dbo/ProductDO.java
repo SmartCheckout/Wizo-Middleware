@@ -3,6 +3,7 @@ package com.smartshopper.models.dbo;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.smartshopper.common.Mappable;
 import com.smartshopper.models.io.Product;
 
 

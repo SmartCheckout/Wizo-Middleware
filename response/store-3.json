@@ -1,0 +1,21 @@
+{
+    "id" : "ST0003",
+    "barcode" : "011431017",
+    "title" : "Sample Store",
+    "address" : {
+        "addressLine1" : "1445 Kerley Drive",
+        "city" : "San Jose",
+        "state" : "CA",
+        "postalCode" : "95122",
+        "country" : "USA"
+    },
+    "phone" : "14088851143",
+    "email" : "ST0003@walmart.com",
+    "location" : {
+        "type" : "Point",
+        "coordinates" : [ 
+            -121.102, 
+            37.346
+        ]
+    }
+}

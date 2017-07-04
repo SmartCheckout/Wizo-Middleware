@@ -1,0 +1,22 @@
+{
+    "id" : "ST0001",
+    "title" : "Target",
+    "barcode" : "ST0001",
+    "address" : {
+        "addressLine1" : "San Jose Market Center",
+        "addressLine2" : "533 Coleman Ave",
+        "city" : "San Jose",
+        "state" : "CA",
+        "postalCode" : "95110",
+        "country" : "USA"
+    },
+    "phone" : "15202240849",
+    "email" : "ST0001@target.com",
+    "location" : {
+        "type" : "Point",
+        "coordinates" : [ 
+            -121.906, 
+            37.341
+        ]
+    }
+}

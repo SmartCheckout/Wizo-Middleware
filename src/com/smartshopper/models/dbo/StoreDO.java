@@ -6,9 +6,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import com.smartshopper.models.Address;
 import com.smartshopper.models.Location;
 import com.smartshopper.models.io.Store;
+import com.smartshopper.common.Mappable;
 
 @Document(collection="smartshopper.store")
-public class StoreDO {
+public class StoreDO{
 
 	@Id
 	private String id;
@@ -86,11 +87,5 @@ public class StoreDO {
 	public void setLocation(Location location) {
 		this.location = location;
 	}
-	
-	
-	
-	
-	
-	
-	
+		
 }

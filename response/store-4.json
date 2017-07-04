@@ -1,0 +1,22 @@
+{
+   "id" : "ST0004",
+    "title" : "Target",
+    "barcode" : "ST0004",
+    "address" : {
+        "addressLine1" : "Eaves San Jose",
+        "addressLine2" : "N Capitol Avenue",
+        "city" : "San Jose",
+        "state" : "CA",
+        "postalCode" : "95132",
+        "country" : "USA"
+    },
+    "phone" : "15202240849",
+    "email" : "ST0004@target.com",
+    "location" : {
+        "type" : "Point",
+        "coordinates" : [ 
+            -121.883, 
+            37.401
+        ]
+    }
+}

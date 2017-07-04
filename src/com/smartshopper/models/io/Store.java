@@ -101,12 +101,16 @@ public class Store {
 	}
 	
 	public String generateDisplayAddress(Address address, String storeTitle){
+		
 		StringBuffer displayAddrBuffer = new StringBuffer();
-		displayAddrBuffer.append(storeTitle);
-		displayAddrBuffer.append(", ");
-		displayAddrBuffer.append(address.getAddressLine1());
-		displayAddrBuffer.append(", ");
-		displayAddrBuffer.append(address.getCity());
+		if(address!=null){
+			displayAddrBuffer.append(storeTitle);
+			displayAddrBuffer.append(", ");
+			displayAddrBuffer.append(address.getAddressLine1());
+			displayAddrBuffer.append(", ");
+			displayAddrBuffer.append(address.getCity());
+			
+		}
 		
 		return displayAddrBuffer.toString();
 	}

@@ -1,0 +1,21 @@
+{
+    "id" : "ST0002",
+    "title" : "San Jose Walmart Supercenter",
+    "barcode" : "ST0002",
+    "address" : {
+        "addressLine1" : "777 Story Rdr",
+        "city" : "San Jose",
+        "state" : "CA",
+        "postalCode" : "95122",
+        "country" : "USA"
+    },
+    "phone" : "14088851142",
+    "email" : "ST0002@walmart.com",
+    "location" : {
+        "type" : "Point",
+        "coordinates" : [ 
+            -121.860648, 
+            37.33199
+        ]
+    }
+}
