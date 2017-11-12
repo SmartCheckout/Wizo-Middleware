@@ -9,6 +9,8 @@ import java.util.List;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import com.smartshopper.common.Mappable;
 import com.smartshopper.models.Bill;
@@ -16,15 +18,18 @@ import com.smartshopper.models.Payment;
 import com.smartshopper.models.io.CartItem;
 import com.smartshopper.models.io.Store;
 import com.smartshopper.models.io.Transaction;
-import com.smartshopper.repository.User;
+import com.smartshopper.models.io.User;
 
 @Document(collection="smartshopper.transaction")
 public class TransactionDO implements Mappable {
 	@Id
 	private String trnsId;
+	@DateTimeFormat(iso = ISO.DATE_TIME)
 	private Date trnsDate;
 	private String status;
+	@DateTimeFormat(iso = ISO.DATE_TIME)
 	private Date createTS;
+	@DateTimeFormat(iso = ISO.DATE_TIME)
 	private Date updateTS;
 	
 	@DBRef

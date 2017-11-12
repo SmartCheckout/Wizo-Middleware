@@ -6,21 +6,27 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
 import com.smartshopper.common.Mappable;
 import com.smartshopper.models.Bill;
 import com.smartshopper.models.Payment;
 import com.smartshopper.models.dbo.CartItemDO;
 import com.smartshopper.models.dbo.StoreDO;
 import com.smartshopper.models.dbo.TransactionDO;
-import com.smartshopper.repository.User;
 
 public class Transaction implements Mappable {
 	
 	protected String trnsId;
+	@DateTimeFormat(iso= ISO.DATE_TIME)
 	private Date trnsDate;
 	private String status;
+	@DateTimeFormat(iso= ISO.DATE_TIME)
 	private Date createTS;
+	@DateTimeFormat(iso= ISO.DATE_TIME)
 	private Date updateTS;
+	
 	private Store store;
 	private User customer;
 	private List<CartItem> cart;

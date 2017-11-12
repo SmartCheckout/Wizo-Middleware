@@ -49,11 +49,11 @@ public class ProductRestController {
 		
 		try{
 			if(!StringUtils.isEmpty(productId)){
-				//result = productService.getProductDetailsById(productId);
-				result = ProductRestController.getRandomProduct();
+				result = productService.getProductDetailsById(productId);
+				//result = ProductRestController.getRandomProduct();
 			}else if(!StringUtils.isEmpty(sku)){
-				//result = productService.getProductDetailsBySKU(sku);
-				result = ProductRestController.getRandomProduct();
+				result = productService.getProductDetailsBySKU(sku);
+				//result = ProductRestController.getRandomProduct();
 			}
 		
 			if(result == null) throw new ProductNotFoundException("Product details unavailable");

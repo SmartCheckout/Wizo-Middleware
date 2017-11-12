@@ -35,6 +35,11 @@ public class StoreDO{
 		this.location = location;
 	}
 	
+	public StoreDO(String id){
+		super();
+		this.id = id;
+	}
+	
 	public Store toIO(){
 		return new Store(id, barcode, title, address, phone, email, location);
 	}

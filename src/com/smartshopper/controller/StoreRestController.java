@@ -1,12 +1,10 @@
 package com.smartshopper.controller;
 
 import java.io.File;
-import java.util.Random;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.smartshopper.exceptions.Exceptions.MoreStoresFoundException;
 import com.smartshopper.exceptions.Exceptions.NoStoreFoundException;
+import com.smartshopper.models.Location;
 import com.smartshopper.models.io.Store;
 import com.smartshopper.service.StoreService;
 
@@ -65,17 +64,13 @@ public class StoreRestController {
 											throws NoStoreFoundException,MoreStoresFoundException{
 		
 		
-		/*Location queryLoc = new Location("Point", new Double[] {longitude,lattitude});
+		Location queryLoc = new Location("Point", new Double[] {longitude,lattitude});
 		List<Store> stores = storeService.findNearByStores(queryLoc, radius, context);
 		
 		if(stores == null || stores.size() ==0)
 			throw new NoStoreFoundException("Store not found for the input location");
 		if(stores.size() > 1)
 			throw new MoreStoresFoundException("More than one store matched for the input location");
-		*/
-		
-		List<Store> stores = new ArrayList<Store>();
-		stores.add(StoreRestController.getRandomStore());
 		return stores;
 	}
 	
@@ -84,10 +79,9 @@ public class StoreRestController {
 	 * @param : barcode; barcode of store
 	 * @return: Store
 	 * */
-	@RequestMapping(method=RequestMethod.GET,path="/store/barcodesearch/{barcode}")
-	public Store findStoreByBarcode(@PathVariable("barcode") String barcode) throws NoStoreFoundException{
-		//Store store = storeService.findStoreByBarcode(barcode);
-		Store store = StoreRestController.getRandomStore();
+	@RequestMapping(method=RequestMethod.GET,path="/store/barcodesearch")
+	public Store findStoreByBarcode(@RequestParam(value= "barcode", required = true) String barcode) throws NoStoreFoundException{
+		Store store = storeService.findStoreByBarcode(barcode);
 		if(store == null){
 			throw new NoStoreFoundException("No store details matched for the input barcode");
 		}

@@ -1,4 +1,4 @@
-package com.smartshopper.repository;
+package com.smartshopper.models.io;
 
 public class User {
 	public User(){

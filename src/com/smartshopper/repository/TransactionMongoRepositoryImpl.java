@@ -1,5 +1,6 @@
 package com.smartshopper.repository;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.apache.commons.lang3.StringUtils;
@@ -27,7 +28,13 @@ public class TransactionMongoRepositoryImpl implements TransactionCustomReposito
 			Update update = new Update();
 			for(String key : objectMap.keySet()){
 				// updating other attributes
-				update.set(key, objectMap.get(key));
+				Object value = objectMap.get(key);
+				// Supporting payment entries to be added to the list instead of replacing the entire list
+				if("PAYMENT".equals(key.toUpperCase())){
+					update.addToSet(key).each(value);
+				}else{
+					update.set(key, objectMap.get(key));
+				}
 			}
 			
 			mongoTemplate.updateFirst(query, update, TransactionDO.class);
@@ -35,5 +42,7 @@ public class TransactionMongoRepositoryImpl implements TransactionCustomReposito
 		}
 		return updated;
 	}
+	
+	
 
 }

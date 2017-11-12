@@ -4,6 +4,7 @@ public class Bill {
 	private Double subTotal;
 	private Double tax;
 	private Double total;
+	private Double savings;
 	
 	public Bill(){
 		super();
