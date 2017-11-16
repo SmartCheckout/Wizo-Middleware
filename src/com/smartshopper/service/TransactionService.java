@@ -52,14 +52,15 @@ public class TransactionService {
 		return fetched;
 	}
 	
-	public List<Transaction> searchTransactions(String status, User customer, Date trnsDate, String storeId ){
-		List<Transaction> result = new ArrayList<Transaction>();
-		StoreDO store = storeId!=null ?new StoreDO(storeId) : null;
-		Example<TransactionDO> tExample = Example.of(new TransactionDO(null, trnsDate, status, null, null, store, null, null, null,null));
-		for(TransactionDO tDO : trnsRepo.findAll(tExample)){
-			result.add(tDO.toIO());
+	public List<Transaction> searchTransactions(String status, String userId ){
+		List<TransactionDO> fetchedDOList = trnsRepo.getTransactionsForCustomer(status, userId);
+		
+		List<Transaction> fetchedList = new ArrayList<Transaction>();
+		for(TransactionDO transDo:fetchedDOList)
+		{
+			fetchedList.add(transDo.toIO());
 		}
 		
-		return result;
+		return fetchedList;
 	}
 }

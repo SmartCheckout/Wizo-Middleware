@@ -1,6 +1,6 @@
 package com.smartshopper.controller;
 
-import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +21,12 @@ public class TransactionRestController {
 	@RequestMapping(path="/transaction", method = RequestMethod.GET)
 	public Transaction getTransaction(@RequestParam(value="trnsId",required=true) String trnsId){
 		return trnsService.getTransaction(trnsId);
+		
+	}
+	
+	@RequestMapping(path="/transaction/search", method = RequestMethod.GET)
+	public List<Transaction> getTransactionsForCustomer(@RequestParam(value="userId",required=true) String userId,@RequestParam(value="status",required=true) String status){
+		return trnsService.searchTransactions(status, userId);
 		
 	}
 	

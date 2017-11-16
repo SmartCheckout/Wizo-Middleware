@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.smartshopper.common.Mappable;
+import com.smartshopper.models.Weight;
 import com.smartshopper.models.io.Product;
 
 
@@ -18,13 +19,14 @@ public class ProductDO{
 	private String category;
 	private Double retailPrice;
 	private Float discount;
+	private Weight weight;
 	
 	public ProductDO(){
 		super();
 	}
 	
 	public ProductDO(String uniqueId, String barcode, String title,
-			String description, String category, Double retailPrice,Float discount) {
+			String description, String category, Double retailPrice,Float discount, Weight weight) {
 		super();
 		this.uniqueId = uniqueId;
 		this.barcode = barcode;
@@ -33,11 +35,12 @@ public class ProductDO{
 		this.category = category;
 		this.retailPrice = retailPrice;
 		this.discount = discount;
+		this.weight = weight;
 	}
 
 
 	public Product toIO(){
-		return new Product(uniqueId, barcode, title, description, category, retailPrice, discount);
+		return new Product(uniqueId, barcode, title, description, category, retailPrice, discount,weight);
 	}
 
 	public String getUniqueId() {
@@ -96,6 +99,14 @@ public class ProductDO{
 
 	public void setRetailPrice(Double retailPrice) {
 		this.retailPrice = retailPrice;
+	}
+
+	public Weight getWeight() {
+		return weight;
+	}
+
+	public void setWeight(Weight weight) {
+		this.weight = weight;
 	}
 	
 	
