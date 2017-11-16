@@ -34,7 +34,7 @@ public class TransactionDO implements Mappable {
 	
 	@DBRef
 	private StoreDO store;
-	@DBRef
+	//@DBRef
 	private User customer;
 	List<CartItemDO> cart;
 	private Bill bill;

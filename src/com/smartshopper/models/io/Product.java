@@ -1,5 +1,6 @@
 package com.smartshopper.models.io;
 
+import com.smartshopper.models.Weight;
 import com.smartshopper.models.dbo.ProductDO;
 
 public class Product{
@@ -11,11 +12,12 @@ public class Product{
 	private String category;
 	private Double retailPrice;
 	private Float discount;
+	private Weight weight;
 
 	public Product(){
 		super();
 	}
-	public Product(String uniqueId, String barcode, String title, String description, String category, Double retailPrice, Float discount) {
+	public Product(String uniqueId, String barcode, String title, String description, String category, Double retailPrice, Float discount,Weight weight) {
 		this.uniqueId = uniqueId;
 		this.barcode = barcode;
 		this.title = title;
@@ -23,10 +25,11 @@ public class Product{
 		this.category = category;
 		this.retailPrice = retailPrice;
 		this.discount = discount;
+		this.weight = weight;
 	}
 	
 	public ProductDO toDBO(){
-		return new ProductDO(uniqueId, barcode, title, description, category, retailPrice, discount);
+		return new ProductDO(uniqueId, barcode, title, description, category, retailPrice, discount,weight);
 	}
 	public String getUniqueId() {
 		return uniqueId;
@@ -83,5 +86,13 @@ public class Product{
 	public void setDiscount(Float discount) {
 		this.discount = discount;
 	}
+	public Weight getWeight() {
+		return weight;
+	}
+	public void setWeight(Weight weight) {
+		this.weight = weight;
+	}
+	
+	
 
 }

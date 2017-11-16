@@ -1,10 +1,12 @@
 package com.smartshopper.repository;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -41,6 +43,20 @@ public class TransactionMongoRepositoryImpl implements TransactionCustomReposito
 			updated = mongoTemplate.findOne(query, TransactionDO.class);
 		}
 		return updated;
+	}
+
+	@Override
+	public List<TransactionDO> getTransactionsForCustomer(String status, String customerId) {
+		
+		Query query = new Query();
+		Pageable pageable = new PageRequest(0,5);
+		query.with(pageable);
+		query.addCriteria(Criteria.where("status").is(status));
+		query.addCriteria(Criteria.where("customer.userId").is(customerId));
+		
+		List<TransactionDO> transactionList = mongoTemplate.find(query, TransactionDO.class);
+		
+		return transactionList;
 	}
 	
 	

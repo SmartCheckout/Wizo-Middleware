@@ -18,6 +18,7 @@ buildSrc/build
 /src/asciidoc/build
 target/
 .metadata/
+.settings/*
 
 # Eclipse artifacts, including WTP generated manifests
 .classpath
