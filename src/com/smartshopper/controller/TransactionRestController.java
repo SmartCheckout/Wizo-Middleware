@@ -3,6 +3,9 @@ package com.smartshopper.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,9 +28,11 @@ public class TransactionRestController {
 	}
 	
 	@RequestMapping(path="/transaction/search", method = RequestMethod.GET)
-	public List<Transaction> getTransactionsForCustomer(@RequestParam(value="userId",required=true) String userId,@RequestParam(value="status",required=true) String status){
-		return trnsService.searchTransactions(status, userId);
-		
+	public Page<Transaction> getTransactionsForCustomer(@RequestParam(value="userId",required=true) String userId,@RequestParam(value="status",required=true) String status, @RequestParam(required=false) Integer size,@RequestParam(required=false) Integer page){
+		Pageable pageable = null;
+		if(page != null && size != null)
+			pageable = new PageRequest(page, size);
+		return trnsService.searchTransactions(status, userId,pageable);		
 	}
 	
 	@RequestMapping(path="/transaction/create", method = RequestMethod.POST)

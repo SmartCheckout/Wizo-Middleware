@@ -7,6 +7,9 @@ import java.util.List;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.support.PageableExecutionUtils;
 import org.springframework.stereotype.Service;
 
 import com.smartshopper.models.dbo.StoreDO;
@@ -52,15 +55,19 @@ public class TransactionService {
 		return fetched;
 	}
 	
-	public List<Transaction> searchTransactions(String status, String userId ){
-		List<TransactionDO> fetchedDOList = trnsRepo.getTransactionsForCustomer(status, userId);
-		
+	public Page<Transaction> searchTransactions(String status, String userId,Pageable pageable ){
+		Page<TransactionDO> fetchedDOList = trnsRepo.getTransactionsForCustomer(status, userId,pageable);
+				
 		List<Transaction> fetchedList = new ArrayList<Transaction>();
 		for(TransactionDO transDo:fetchedDOList)
 		{
 			fetchedList.add(transDo.toIO());
 		}
 		
-		return fetchedList;
+		Page<Transaction> fetchedIOList =  PageableExecutionUtils.getPage(
+				fetchedList, 
+                pageable, 
+                () -> fetchedDOList.getTotalElements());
+		return fetchedIOList;
 	}
 }
